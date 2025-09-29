@@ -42,7 +42,9 @@ For NSA selected attention module, the major system bottleneck, NSA loops over q
 In contrast, FSA exchanges the kernel loop order of original NSA kernel design, i.e., FSA loops over KV blocks in the outer loop and loops over query tokens in the inner loop. To optimize performance, FSA decouples the computation into three major kernels: (i) the main kernel batches query tokens that attend to the same KV block and stores the partial results to a buffer, (ii) the reduction kernel accumulates attention results for each query token, and (iii) the online softmax kernel that handles online softmax statistics computation. The key insight behind this arrangement is to effectively reduce unnecessary memory access and computations for the padded data, while avoiding `atomic` additions for accumulating attention results for each query token across KV blocks.
 
 The concrete computation process comparison between NSA (left) and FSA main kernel (right) can be visualized as follows:
-<img width="8817" height="3669" alt="NSA_FSA_cmop" src="https://github.com/user-attachments/assets/12250042-3c5d-40f3-82c3-d0ca443c4c45" />
+
+![combine2 (1)](https://github.com/user-attachments/assets/00ac87a6-1af3-4f78-b019-b2d4edf997e1)
+
 
 ## Advantages
 
